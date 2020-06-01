@@ -29,6 +29,12 @@ def your_url():
             # save user file and append shortcut to json
             f = request.files['file']
             full_name = request.form['code'] + secure_filename(f.filename)
+
+            try:
+                os.makedirs(os.path.join(os.getcwd(), 'static/user_files/'))
+            except OSError as e:
+                if e.errno != errno.EEXIST:
+                    raise
             f.save(os.path.join(os.getcwd(), 'static/user_files/', full_name))
             urls[request.form['code']] = {'file': full_name}
 
