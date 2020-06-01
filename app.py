@@ -34,7 +34,8 @@ def your_url():
                 os.makedirs(os.path.join(os.getcwd(), 'static/user_files/'))
             except OSError as e:
                 if e.errno != errno.EEXIST:
-                    raise
+                    return abort(500)
+
             f.save(os.path.join(os.getcwd(), 'static/user_files/', full_name))
             urls[request.form['code']] = {'file': full_name}
 
@@ -65,6 +66,10 @@ def redirect_to_url(code):
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template('page_not_found.html'), 404
+
+@app.errorhandler(500)
+def page_not_found(error):
+    return render_template('internal_error.html'), 500
 
 @app.route('/api')
 def session_api():
