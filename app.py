@@ -68,7 +68,7 @@ def page_not_found(error):
     return render_template('page_not_found.html'), 404
 
 @app.errorhandler(500)
-def page_not_found(error):
+def internal_error(error):
     return render_template('internal_error.html'), 500
 
 @app.route('/api')
