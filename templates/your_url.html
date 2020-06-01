@@ -2,5 +2,5 @@
 {% block title %}URL for "{{ urlcode }}"{% endblock %}
 {% block main %}
       <h1>Your URL</h1>
-      <h2>{{ urlcode }}</h2>
+      <h2><a href="{{ url_for('home') ~ urlcode }}">{{ urlcode }}</a></h2>
 {% endblock %}
