@@ -1,14 +1,7 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-   <head>
-      <meta charset="utf-8">
-      <title></title>
-   </head>
-   <body>
+{% extends 'base.html'%}
+{% block title %}URL shortener<{% endblock %}
+{% block main %}
       <h1>URL shortener</h1>
-      {% for message in get_flashed_messages() %}
-         <h2>{{ message }}</h2>
-      {% endfor %}
       <form method="post" class="" action="your-url">
          <label for="url">Website URL</label>
          <input type="url" name="url" value="" required>
@@ -28,5 +21,13 @@
          <br>
          <input type="submit" value="Shorten">
       </form>
-   </body>
-</html>
+
+      {% if codes %}
+      <h2>Codes you have created</h2>
+      <ul>
+         {% for code in codes %}
+         <li>{{ code }}</li>
+         {% endfor %}
+      </ul>
+      {% endif %}
+{% endblock %}
